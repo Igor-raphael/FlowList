@@ -36,13 +36,24 @@ public class GeneralExceptionHandler {
 			
 			
 			@ExceptionHandler(Exception.class)
-			private ResponseEntity<ErrorResponse> handleGeneralException(Exception ex){
+			private ResponseEntity<ErrorResponse> handleServerError(Exception ex){
 				return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(
 		
 						new ErrorResponse(
 								500, 
 								HttpStatus.INTERNAL_SERVER_ERROR.name(),
 								"Erro interno no servidor."
+								));
+			}
+			
+			@ExceptionHandler(org.springframework.dao.DataAccessException.class)
+			private ResponseEntity<ErrorResponse> handleDatabaseException(Exception ex){
+				return ResponseEntity.status(HttpStatus.SERVICE_UNAVAILABLE).body(
+		
+						new ErrorResponse(
+								503, 
+								HttpStatus.SERVICE_UNAVAILABLE.name(),
+								"Serviço temporariamente indisponivel. Tente novamente."
 								));
 			}
 			
