@@ -3,9 +3,10 @@ import { NgIf } from '@angular/common';
 import { FormsModule, NgForm } from '@angular/forms';
 import { TarefaDTO } from '../../model/TarefaDTO';
 import { CreateService } from '../../services/create/create.service';
-import { ListService } from '../../services/list/list-service';
 import { Tarefas } from '../../model/tarefas';
 import { UpdateService } from '../../services/update/update.service';
+import { ToastrService } from 'ngx-toastr';
+import { inject } from '@angular/core';
 
 @Component({
   selector: 'app-modal',
@@ -14,6 +15,8 @@ import { UpdateService } from '../../services/update/update.service';
   styleUrl: './modal.component.scss',
 })
 export class ModalComponent {
+  toast = inject(ToastrService);
+
   constructor(
     private createService: CreateService,
     private updateService: UpdateService,
@@ -60,7 +63,7 @@ export class ModalComponent {
 
   onSubmit(form: NgForm) {
     if (form.invalid) return;
-      if (this.prioridades.prioridade === null) return;
+    if (this.prioridades.prioridade === null) return;
 
     if (this.EditID === null) {
       const payloadCreate: TarefaDTO = {
@@ -75,6 +78,11 @@ export class ModalComponent {
           this.reload.emit();
           form.resetForm({ prioridade: null });
           this.formToggle();
+          this.toast.success('Tarefa criada com sucesso.');
+        },
+
+        error: () => {
+          this.toast.error('Error ao criar tarefa.');
         },
       });
     } else {
@@ -90,6 +98,11 @@ export class ModalComponent {
         next: () => {
           this.reload.emit();
           this.formToggle();
+          this.toast.success('Tarefa alterada com sucesso.');
+        },
+
+        error: () => {
+          this.toast.error('Error ao alterar tarefa.');
         },
       });
     }
