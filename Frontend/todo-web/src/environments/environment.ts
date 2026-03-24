@@ -1,4 +1,4 @@
 export const environment = {
-  production: false,
-  apiUrl: 'http://localhost:8080/todos'
-}
+  production: true,
+  apiUrl: 'https://flowlist-api.onrender.com/todos',
+};
