@@ -20,9 +20,10 @@ Este projeto foi pensado tanto como **estudo prático** quanto como **portfólio
 
 ## 🧩 Arquitetura Geral
 
-<img width="970" height="397" alt="Relação" src="https://github.com/user-attachments/assets/9b9b4f04-b582-4c64-81a8-cc068ead7815" />
+<img width="1346" height="392" alt="arch" src="https://github.com/user-attachments/assets/682fc8ef-d8f2-42ed-a12f-4f99f92396df" />
 
-- O **Angular** é responsável pela interface, experiência do usuário e consumo da API.
+- O **Angular** 
+é responsável pela interface, experiência do usuário e consumo da API.
 - O **Java(Spring Boot)** expõe uma API REST responsável por toda a regra de negócio.
 - A comunicação ocorre via **HTTP com JSON**.
 
